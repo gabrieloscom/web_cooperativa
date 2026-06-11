@@ -32,7 +32,7 @@ function ReclamoTercero() {
           </ol>
         </div>
         <div className="text-center">
-          <a href="/pdf/RECLAMO-TERC.pdf" target="_blank" rel="noreferrer" className="btn-primary">Descargar formulario</a>
+          <a href="/pdf/reclamo-form.html" target="_blank" rel="noreferrer" className="btn-primary">Descargar formulario</a>
         </div>
       </div>
     </section>
