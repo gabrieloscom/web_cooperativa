@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1A3151;
+  --color-primary-light: #244672;
+  --color-secondary: #39669D;
+  --color-accent: #366298;
+  --color-text: #666666;
+  --color-text-light: #999999;
+  --color-whatsapp: #25d366;
+  --color-gold: #C9A84C;
+}
+
+@layer base {
+  body {
+    @apply text-gray-600 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-3 py-2 text-sm font-medium text-white hover:text-gray-200 transition-colors;
+  }
+  .dropdown-link {
+    @apply block px-4 py-2 text-sm text-white hover:bg-primary-light transition-colors;
+  }
+  .btn-primary {
+    @apply inline-block bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-light transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  .btn-outline {
+    @apply inline-block border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-primary transition-all duration-200;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden;
+  }
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-primary mb-2;
+  }
+  .section-subtitle {
+    @apply text-gray-500 mb-8 max-w-2xl;
+  }
+}
