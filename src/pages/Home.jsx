@@ -86,7 +86,7 @@ function Home() {
       {/* Banners */}
       <section className="py-8 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <a href="/pdf/Cocherias.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-4 bg-gradient-to-br from-primary to-primary-light rounded-xl p-5 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          <a href="/pdf/cocherias.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-4 bg-gradient-to-br from-primary to-primary-light rounded-xl p-5 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
             <div className="min-w-12 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
               <ChurchIcon className="text-white" fontSize="medium" />
             </div>
