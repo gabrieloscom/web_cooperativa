@@ -40,7 +40,7 @@ const menuItems = [
       { label: 'Productores no Registrados', href: 'https://tarifador.segurosluzyfuerza.com.ar/publico/Tarifador_Online.aspx?ZonaRie=15' },
     ],
   },
-  { label: 'Polizas', path: 'http://tarifador.segurosluzyfuerza.com.ar/', external: true },
+  { label: 'Copia Poliza', path: 'http://tarifador.segurosluzyfuerza.com.ar/', external: true },
 ]
 
 function Navbar() {
