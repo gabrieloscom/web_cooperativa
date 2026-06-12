@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const patterns = {
-  patente: { regex: /^[A-Za-z]{2,3}\s?\d{3}[A-Za-z]{0,2}$/, message: 'Formato inválido (ej: ABC 123 o AB123CD)', allow: /[A-Za-z0-9\s]/ },
+  patente: { regex: /^[A-Za-z]{1,3}\s?\d{3}[A-Za-z]{0,2}$/, message: 'Formato inválido (ej: ABC 123 o AB123CD)', allow: /[A-Za-z0-9\s]/ },
   poliza: { regex: /^\d+$/, message: 'Solo números', allow: /\d/ },
 }
 
@@ -12,10 +12,13 @@ const fields = {
     inputs: [
       { name: 'patente', label: 'Número de patente', placeholder: 'Ej: ABC 123', pattern: patterns.patente },
       { name: 'fecha', label: 'Fecha a partir de la cual solicitás la baja', type: 'date' },
-      { name: 'motivo', label: 'Motivo', placeholder: 'Venta, cambio de aseguradora, sin uso, etc.' },
+      { name: 'motivo', label: 'Motivo', type: 'select', options: ['Venta', 'Cambio de aseguradora', 'Sin uso', 'Otros'] },
+      { name: 'motivoOtro', label: 'Especificar motivo', placeholder: 'Describí el motivo...', dependsOn: 'motivo', dependsValue: 'Otros' },
     ],
-    whatsappMsg: (data) =>
-      `Hola, quiero solicitar la baja de mi vehículo/moto.%0A%0APatente: ${data.patente}%0AFecha de baja: ${data.fecha}%0AMotivo: ${data.motivo}`,
+    whatsappMsg: (data) => {
+      const motivo = data.motivo === 'Otros' ? data.motivoOtro : data.motivo
+      return `[BAJA VEHICULO]%0AHola, quiero solicitar la baja de mi vehículo/moto.%0A%0APatente: ${data.patente}%0AFecha de baja: ${data.fecha}%0AMotivo: ${motivo}`
+    },
   },
   otros: {
     title: 'Bajas otros Ramos',
@@ -27,7 +30,7 @@ const fields = {
       { name: 'nombre', label: '', placeholder: '', dependsOn: 'tipoPersona', dynamicLabel: { 'Apellido y Nombre': 'Apellido y nombre', 'DNI': 'DNI' }, dynamicPlaceholder: { 'Apellido y Nombre': 'Ej: García, Juan', 'DNI': 'Ej: 20.123.456' }, dynamicPattern: { 'Apellido y Nombre': { regex: /^[A-Za-záéíóúñüÁÉÍÓÚÑÜ\s,]+$/, message: 'Solo letras y espacios', allow: /[A-Za-záéíóúñüÁÉÍÓÚÑÜ\s,]/ }, 'DNI': { regex: /^\d{1,2}\.?\d{3}\.?\d{3}$/, message: 'Solo números (ej: 20.123.456)', allow: /[\d.]/ } } },
     ],
     whatsappMsg: (data) =>
-      `Hola, quiero solicitar la baja de mi seguro.%0A%0AN° de póliza: ${data.poliza}%0AFecha de baja: ${data.fecha}%0A${data.tipoPersona}: ${data.nombre}`,
+      `[BAJA OTROS]%0AHola, quiero solicitar la baja de mi seguro.%0A%0AN° de póliza: ${data.poliza}%0AFecha de baja: ${data.fecha}%0A${data.tipoPersona}: ${data.nombre}`,
   },
 }
 
@@ -55,10 +58,18 @@ function BajaFormModal({ type, onClose }) {
     return inp.pattern
   }
 
+  function shouldSkip(inp) {
+    if (!inp.dependsOn) return false
+    const parentVal = formData[inp.dependsOn]
+    if (!parentVal) return true
+    if (inp.dependsValue && parentVal !== inp.dependsValue) return true
+    return false
+  }
+
   function validate() {
     const newErrors = {}
     for (const inp of config.inputs) {
-      if (inp.dependsOn && !formData[inp.dependsOn]) continue
+      if (shouldSkip(inp)) continue
       const val = formData[inp.name]
       const pattern = getPattern(inp)
       if (!val?.trim()) {
@@ -80,17 +91,6 @@ function BajaFormModal({ type, onClose }) {
     onClose()
   }
 
-  function isFilled(inp) {
-    if (inp.dependsOn && !formData[inp.dependsOn]) return true
-    const val = formData[inp.name]
-    if (!val?.trim()) return false
-    const pattern = getPattern(inp)
-    if (pattern && !pattern.regex.test(val.trim())) return false
-    return true
-  }
-
-  const allFilled = config.inputs.every(isFilled)
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
@@ -100,7 +100,7 @@ function BajaFormModal({ type, onClose }) {
         </div>
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           {config.inputs.map((inp) => {
-            if (inp.dependsOn && !formData[inp.dependsOn]) return null
+            if (shouldSkip(inp)) return null
 
             const label = inp.dynamicLabel ? inp.dynamicLabel[formData[inp.dependsOn]] : inp.label
             const placeholder = inp.dynamicPlaceholder ? inp.dynamicPlaceholder[formData[inp.dependsOn]] : inp.placeholder
@@ -133,6 +133,19 @@ function BajaFormModal({ type, onClose }) {
                       </label>
                     ))}
                   </div>
+                ) : inp.type === 'select' ? (
+                  <select
+                    name={inp.name}
+                    value={formData[inp.name] || ''}
+                    onChange={handleChange}
+                    required
+                    className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${errors[inp.name] ? 'border-red-400' : 'border-gray-300'}`}
+                  >
+                    <option value="">Seleccionar...</option>
+                    {inp.options.map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
                 ) : (
                   <input
                     type="text"
@@ -154,7 +167,7 @@ function BajaFormModal({ type, onClose }) {
             </button>
             <button
               type="submit"
-              disabled={!allFilled || sending}
+              disabled={sending}
               className="flex-1 text-sm font-semibold text-white bg-accent hover:bg-[#4A7AB8] disabled:opacity-50 px-4 py-2.5 rounded-lg transition-colors"
             >
               {sending ? 'Enviando...' : 'Enviar por WhatsApp'}
