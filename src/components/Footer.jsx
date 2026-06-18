@@ -89,39 +89,37 @@ function Footer() {
             </a>
           </div>
         </div>
+      </div>
 
-        <div className="mt-6">
-          <div className="bg-gradient-to-b from-white/10 to-white/5 rounded-xl p-6 text-center">
-            <p className="text-base text-slate-200 leading-relaxed">
-             La entidad aseguradora dispone de un Servicio de Atención al Asegurado que atenderá las consultas y reclamos que presenten los tomadores de seguros, asegurados, beneficiarios y/o derechohabientes.
+      <div className="bg-gradient-to-b from-white/10 to-white/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+          <p className="text-base text-slate-200 leading-relaxed">
+           La entidad aseguradora dispone de un Servicio de Atención al Asegurado que atenderá las consultas y reclamos que presenten los tomadores de seguros, asegurados, beneficiarios y/o derechohabientes.
+          </p>
+
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <h4 className="text-base font-semibold text-white">
+              Servicio de Atención al Asegurado
+            </h4>
+            <p className="mt-2 text-base text-slate-200">
+              Responsable: Rubén Daniel Fernandez
             </p>
-
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <h4 className="text-base font-semibold text-white">
-                Servicio de Atención al Asegurado
-              </h4>
-              <p className="mt-2 text-base text-slate-200">
-                Responsable: Rubén Daniel Fernandez
-              </p>
-              <p className="text-base text-slate-200">
-                1° Suplente: Carolina Amalia Luna
-              </p>
-              <p className="text-base text-slate-200">
-                Teléfono de contacto: 4342-8721 interno 117
-              </p>
-              <Link to="/contacto" className="mt-3 inline-block text-xs font-semibold text-white bg-accent hover:bg-[#4A7AB8] px-4 py-1.5 rounded-full transition-colors">Contacto</Link>
-            </div>
-
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <p className="text-base text-slate-200 leading-relaxed">
-                En caso de reclamo ante la entidad aseguradora no resuelto o desestimado, podrá denunciarlo a través de <a href="https://www.argentina.gob.ar/ssn" target="_blank" rel="noreferrer" className="font-semibold text-gray-100 underline decoration-gray-100/60 underline-offset-2 hover:decoration-gray-100">www.argentina.gob.ar/ssn</a>
-              </p>
-            </div>
+            <p className="text-base text-slate-200">
+              1° Suplente: Carolina Amalia Luna
+            </p>
+            <p className="text-base text-slate-200">
+              Teléfono de contacto: 4342-8721 interno 117
+            </p>
+            <Link to="/contacto" className="mt-3 inline-block text-xs font-semibold text-white bg-accent hover:bg-[#4A7AB8] px-4 py-1.5 rounded-full transition-colors">Contacto</Link>
           </div>
-        </div>
 
-        <div className="mt-8 pt-6 border-t border-white/10">
-          <div className="max-w-6xl mx-auto bg-gradient-to-b from-[#f7f7f7] to-[#efefef] rounded-xl px-6 sm:px-10 py-2">
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <p className="text-base text-slate-200 leading-relaxed">
+              En caso de reclamo ante la entidad aseguradora no resuelto o desestimado, podrá denunciarlo a través de <a href="https://www.argentina.gob.ar/ssn" target="_blank" rel="noreferrer" className="font-semibold text-gray-100 underline decoration-gray-100/60 underline-offset-2 hover:decoration-gray-100">www.argentina.gob.ar/ssn</a>
+            </p>
+          </div>
+
+          <div className="mt-6 bg-gradient-to-b from-[#f7f7f7] to-[#efefef] rounded-xl px-6 sm:px-10 py-2">
             <div className="flex items-center justify-between gap-2 sm:gap-4 flex-col md:flex-row">
               <div className="flex-1 text-center text-[#222]">
                 <p className="text-[11px] sm:text-xs font-normal leading-relaxed">
@@ -158,11 +156,9 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 mt-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-          <p>&copy; 2026 - Cooperativa de Seguros Luz y Fuerza Limitada</p>
-          <p>Todos los derchos reservados.</p>
-        </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-center text-sm text-slate-400">
+        <p>&copy; 2026 - Cooperativa de Seguros Luz y Fuerza Limitada</p>
+        <p>Todos los derechos reservados.</p>
       </div>
     </footer>
   );
