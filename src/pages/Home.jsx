@@ -87,7 +87,7 @@ function Home() {
       </section>
 
       {/* Insurance Products */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-4 bg-gray-50 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-primary">Nuestros Seguros</h2>
@@ -115,7 +115,7 @@ function Home() {
       </section>
 
       {/* Empresas */}
-      <section className="py-12 bg-white">
+      <section className="py-4 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-primary">Seguros para Empresas</h2>
@@ -133,7 +133,7 @@ function Home() {
       </section>
 
       {/* Bajas */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-4 bg-gray-50 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-primary">En caso de baja</h2>
